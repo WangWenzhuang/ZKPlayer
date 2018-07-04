@@ -66,27 +66,27 @@ open class ZKPlayer: UIView {
     private static let bundle = Bundle(url: Bundle(for: ZKPlayer.self).url(forResource: "ZKPlayer", withExtension: "bundle")!)
     /// 全屏模式下返回按钮图片（可重写）
     @objc open var backButtonImage: UIImage? {
-        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_back", ofType: "png"))!)
+        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_back@3x", ofType: "png"))!)
     }
     /// 全屏模式下播放按钮图片（可重写）
     @objc open var playButtonImage: UIImage? {
-        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_play", ofType: "png"))!)
+        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_play@3x", ofType: "png"))!)
     }
     /// 全屏模式下暂停按钮图片（可重写）
     @objc open var pauseButtonImage: UIImage? {
-        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_pause", ofType: "png"))!)
+        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_pause@3x", ofType: "png"))!)
     }
     /// 非全屏模式下播放按钮图片（可重写）
     @objc open var bigPlayButtonImage: UIImage? {
-        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_bigPlay", ofType: "png"))!)
+        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_bigPlay@3x", ofType: "png"))!)
     }
     /// 非全屏模式下暂停按钮图片（可重写）
     @objc open var bigPauseButtonImage: UIImage? {
-        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_bigPause", ofType: "png"))!)
+        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_bigPause@3x", ofType: "png"))!)
     }
     /// 全屏按钮图片（可重写）
     @objc open var fullScreenButtonImage: UIImage? {
-        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_fullScreen", ofType: "png"))!)
+        return UIImage(contentsOfFile: (ZKPlayer.bundle?.path(forResource: "player_fullScreen@3x", ofType: "png"))!)
     }
     /// 视频标题字体（可重写）
     @objc open var titleFont: UIFont {
