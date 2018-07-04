@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'ZKPlayer'
-  s.version = '0.1'
+  s.version = '0.2'
   s.ios.deployment_target = '9.0'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.summary = '封装 AVPlayer，使用方便。'
