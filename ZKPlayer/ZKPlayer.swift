@@ -12,13 +12,13 @@ open class ZKPlayer: UIView {
     @objc convenience init() {
         self.init(frame: CGRect.zero)
     }
-
+    
     @objc convenience init(frame: CGRect, url: URL, title: String) {
         self.init(frame: frame)
         self.videoUrl = url
         self.title = title
     }
-
+    
     @objc override init(frame: CGRect) {
         super.init(frame: frame)
         NotificationCenter.default.addObserver(
@@ -40,11 +40,11 @@ open class ZKPlayer: UIView {
         )
         loadView()
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     deinit {
         // 移除所有监听
         NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
@@ -52,7 +52,7 @@ open class ZKPlayer: UIView {
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
         removePlayerItemObserver(player?.currentItem)
     }
-
+    
     /// 视频路径
     @objc public var videoUrl: URL!
     /// 视频标题
@@ -63,6 +63,9 @@ open class ZKPlayer: UIView {
             titleLabel.text = newValue
         }
     }
+    /// 播放完成回调
+    @objc public var finished: ((_ second: TimeInterval) -> Void)? = nil
+    
     private static let bundle = Bundle(url: Bundle(for: ZKPlayer.self).url(forResource: "ZKPlayer", withExtension: "bundle")!)
     /// 全屏模式下返回按钮图片（可重写）
     @objc open var backButtonImage: UIImage? {
@@ -100,7 +103,7 @@ open class ZKPlayer: UIView {
     @objc open var timeSliderThumbImage: UIImage? {
         return UIImage(named: "player_silder")
     }
-
+    
     /// 程序后台记录当前播放时间
     private var backgroundTime: CMTime?
     /// 是否全屏
@@ -115,7 +118,7 @@ open class ZKPlayer: UIView {
     private lazy var isHideHaderAndControl = false
     /// 防止 AVPlayerLayer 重复点击
     private lazy var isTapEnabled = true
-
+    
     /// AVPlayerLayer
     private lazy var playerLayer = AVPlayerLayer()
     /// AVPlayer
@@ -138,7 +141,7 @@ open class ZKPlayer: UIView {
     }(UILabel())
     /// 头（视频标题和返回按钮）
     private lazy var headerView = UIView()
-
+    
     /// 非全屏模式下播放/暂停按钮
     private lazy var bigPlayButton = UIButton()
     /// 全屏模式下播放/暂停按钮
@@ -167,7 +170,7 @@ open class ZKPlayer: UIView {
     private lazy var timeSlider = UISlider()
     /// 视频控制面板
     private lazy var controlView = UIView()
-
+    
     /// 重新布局界面
     override open func layoutSubviews() {
         super.layoutSubviews()
@@ -327,6 +330,9 @@ extension ZKPlayer {
             removePlayerItemObserver(player.currentItem)
             self.player = nil
             showHeaderAndControl()
+            if let block = finished {
+                block(TimeInterval(timeSlider.maximumValue))
+            }
         }
     }
     /// 视频播放监听
@@ -393,7 +399,7 @@ extension ZKPlayer {
     /// 进度条开始拖拽
     @objc private func timeSliderTouchDragInsideAction() {
         isTimeSliderDraging = true
-
+        
     }
     /// 进度条值更改，在拖拽之后会出发一次
     /// - Parameters:
@@ -505,7 +511,7 @@ extension ZKPlayer {
             self.isHideHaderAndControl = false
             self.autoHideHeaderAndControl()
         }
-
+        
     }
     /// 3秒自动隐藏头和视频控制面板
     private func autoHideHeaderAndControl() {
