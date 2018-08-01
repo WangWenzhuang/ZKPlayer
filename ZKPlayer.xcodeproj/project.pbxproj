@@ -10,14 +10,18 @@
 		A0C3020720ECA78400C30EE9 /* ZKPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C3020520ECA78400C30EE9 /* ZKPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0C3020E20ECA89000C30EE9 /* ZKPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3020D20ECA89000C30EE9 /* ZKPlayer.swift */; };
 		A0C3021020ECC2F600C30EE9 /* ZKPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0C3020F20ECC2F600C30EE9 /* ZKPlayer.bundle */; };
+		F306205CB1F66615EB1CCAC3 /* Pods_ZKPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A1661E561543FA14FBCC41 /* Pods_ZKPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49A1661E561543FA14FBCC41 /* Pods_ZKPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZKPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67AC3B6F5AFEA750B6EE4D33 /* Pods-ZKPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayer/Pods-ZKPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		A0C3020220ECA78400C30EE9 /* ZKPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZKPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C3020520ECA78400C30EE9 /* ZKPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKPlayer.h; sourceTree = "<group>"; };
 		A0C3020620ECA78400C30EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0C3020D20ECA89000C30EE9 /* ZKPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKPlayer.swift; sourceTree = "<group>"; };
 		A0C3020F20ECC2F600C30EE9 /* ZKPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZKPlayer.bundle; sourceTree = "<group>"; };
+		B3E3EEDC30A5B46C32279C5A /* Pods-ZKPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayer/Pods-ZKPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F306205CB1F66615EB1CCAC3 /* Pods_ZKPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +41,8 @@
 			children = (
 				A0C3020420ECA78400C30EE9 /* ZKPlayer */,
 				A0C3020320ECA78400C30EE9 /* Products */,
+				CE61D74092588F15EC486605 /* Pods */,
+				C6D4040B1E6664F112B7A063 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +65,23 @@
 			path = ZKPlayer;
 			sourceTree = "<group>";
 		};
+		C6D4040B1E6664F112B7A063 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49A1661E561543FA14FBCC41 /* Pods_ZKPlayer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE61D74092588F15EC486605 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B3E3EEDC30A5B46C32279C5A /* Pods-ZKPlayer.debug.xcconfig */,
+				67AC3B6F5AFEA750B6EE4D33 /* Pods-ZKPlayer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -76,6 +100,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0C3020A20ECA78400C30EE9 /* Build configuration list for PBXNativeTarget "ZKPlayer" */;
 			buildPhases = (
+				E4E8E14D5CE8746575C9E775 /* [CP] Check Pods Manifest.lock */,
 				A0C301FD20ECA78400C30EE9 /* Sources */,
 				A0C301FE20ECA78400C30EE9 /* Frameworks */,
 				A0C301FF20ECA78400C30EE9 /* Headers */,
@@ -132,6 +157,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E4E8E14D5CE8746575C9E775 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZKPlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A0C301FD20ECA78400C30EE9 /* Sources */ = {
@@ -267,6 +313,7 @@
 		};
 		A0C3020B20ECA78400C30EE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3E3EEDC30A5B46C32279C5A /* Pods-ZKPlayer.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -277,11 +324,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ZKPlayer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangwenzhuang.ZKPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -293,6 +336,7 @@
 		};
 		A0C3020C20ECA78400C30EE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67AC3B6F5AFEA750B6EE4D33 /* Pods-ZKPlayer.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -303,11 +347,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ZKPlayer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangwenzhuang.ZKPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

@@ -7,16 +7,18 @@
 //
 
 import AVKit
+import Kingfisher
 
 open class ZKPlayer: UIView {
     @objc convenience init() {
         self.init(frame: CGRect.zero)
     }
     
-    @objc convenience init(frame: CGRect, url: URL, title: String) {
+    @objc convenience init(frame: CGRect, url: URL, title: String, thumbnailUrl: URL? = nil) {
         self.init(frame: frame)
-        self.videoUrl = url
+        videoUrl = url
         self.title = title
+        self.thumbnailUrl = thumbnailUrl
     }
     
     @objc override init(frame: CGRect) {
@@ -63,6 +65,8 @@ open class ZKPlayer: UIView {
             titleLabel.text = newValue
         }
     }
+    /// 缩略图 URL
+    @objc public var thumbnailUrl: URL? = nil
     /// 播放完成回调
     @objc public var finished: ((_ second: TimeInterval) -> Void)? = nil
     
@@ -123,6 +127,8 @@ open class ZKPlayer: UIView {
     private lazy var playerLayer = AVPlayerLayer()
     /// AVPlayer
     private var player: AVPlayer?
+    /// 缩略图
+    private var thumbnailView = UIImageView()
     /// 显示加载指示器
     private lazy var activityView: UIActivityIndicatorView = {
         $0.activityIndicatorViewStyle = .white
@@ -176,6 +182,8 @@ open class ZKPlayer: UIView {
         super.layoutSubviews()
         // Player
         playerLayer.frame.size = frame.size
+        // thumbnailView
+        thumbnailView.frame.size = frame.size
         // activityView
         activityView.frame.origin = CGPoint(
             x: (frame.width - activityView.frame.width) / 2,
@@ -276,6 +284,7 @@ open class ZKPlayer: UIView {
 extension ZKPlayer {
     /// 播放视频
     @objc public func play() {
+        thumbnailView.removeFromSuperview()
         isPlaying = true
         refreshPlayButton()
         timeSlider.value = 0
@@ -444,6 +453,10 @@ extension ZKPlayer {
         backgroundColor = .black
         layer.addSublayer(playerLayer)
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showAndHideHaderAndControlAction)))
+        if let thumbnailUrl = thumbnailUrl {
+            addSubview(thumbnailView)
+            thumbnailView.kf.setImage(with: thumbnailUrl)
+        }
         // backButton
         backButton.setImage(backButtonImage, for: .normal)
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'ZKPlayer'
-  s.version = '0.3'
+  s.version = '0.4'
   s.ios.deployment_target = '9.0'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.summary = '封装 AVPlayer，使用方便。'
@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.resources = 'ZKPlayer/ZKPlayer.bundle'
   s.requires_arc = true
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
+  s.dependency 'Kingfisher'
 end
