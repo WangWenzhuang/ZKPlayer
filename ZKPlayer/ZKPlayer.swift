@@ -10,18 +10,15 @@ import AVKit
 import Kingfisher
 
 open class ZKPlayer: UIView {
-    @objc convenience init() {
-        self.init(frame: CGRect.zero)
-    }
-    
-    @objc convenience init(frame: CGRect, url: URL, title: String, thumbnailUrl: URL? = nil) {
+    @objc public convenience init(frame: CGRect, url: URL?, title: String, thumbnailUrl: URL? = nil) {
         self.init(frame: frame)
-        videoUrl = url
+        self.videoUrl = url
         self.title = title
         self.thumbnailUrl = thumbnailUrl
+        loadView()
     }
     
-    @objc override init(frame: CGRect) {
+    @objc override private init(frame: CGRect) {
         super.init(frame: frame)
         NotificationCenter.default.addObserver(
             self,
@@ -40,7 +37,6 @@ open class ZKPlayer: UIView {
             name: .AVPlayerItemDidPlayToEndTime,
             object: nil
         )
-        loadView()
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -56,9 +52,9 @@ open class ZKPlayer: UIView {
     }
     
     /// 视频路径
-    @objc public var videoUrl: URL!
+    @objc private var videoUrl: URL!
     /// 视频标题
-    @objc public var title: String {
+    @objc private var title: String {
         get {
             return titleLabel.text ?? ""
         } set {
@@ -66,7 +62,7 @@ open class ZKPlayer: UIView {
         }
     }
     /// 缩略图 URL
-    @objc public var thumbnailUrl: URL? = nil
+    @objc private var thumbnailUrl: URL? = nil
     /// 播放完成回调
     @objc public var finished: ((_ second: TimeInterval) -> Void)? = nil
     
