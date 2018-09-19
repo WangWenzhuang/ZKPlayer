@@ -23,12 +23,12 @@ open class ZKPlayer: UIView {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(appBecomeActive),
-            name: .UIApplicationDidBecomeActive, object: nil
+            name: UIApplication.didBecomeActiveNotification, object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(appWillResignActive),
-            name: .UIApplicationWillResignActive,
+            name: UIApplication.willResignActiveNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -45,8 +45,8 @@ open class ZKPlayer: UIView {
     
     deinit {
         // 移除所有监听
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
         removePlayerItemObserver(player?.currentItem)
     }
@@ -127,7 +127,7 @@ open class ZKPlayer: UIView {
     private var thumbnailView = UIImageView()
     /// 显示加载指示器
     private lazy var activityView: UIActivityIndicatorView = {
-        $0.activityIndicatorViewStyle = .white
+        $0.style = .white
         $0.color = .white
         $0.sizeToFit()
         $0.isHidden = true
@@ -316,7 +316,7 @@ extension ZKPlayer {
     /// 激活 App，继续播放
     @objc private func appBecomeActive() {
         if isPlaying, let player = player, let time = backgroundTime {
-            player.seek(to: time, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero) {
+            player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) {
                 if $0 {
                     player.play()
                 }
@@ -357,7 +357,7 @@ extension ZKPlayer {
                 let totalSecond = Float(duration.value) / Float(duration.timescale)
                 timeSlider.maximumValue = totalSecond
                 totalTimeLalbel.text = convertTime(second: totalSecond)
-                player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: nil) {
+                player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: nil) {
                     let currentSecond = Float($0.value) / Float($0.timescale)
                     if !self.isTimeSliderDraging {
                         self.timeSlider.value = currentSecond
@@ -412,7 +412,7 @@ extension ZKPlayer {
     @objc private func timeSliderChangeAction(slider: UISlider) {
         if let player = player {
             let seconds = slider.value
-            let time = CMTimeMakeWithSeconds(Float64(seconds), 1)
+            let time = CMTimeMakeWithSeconds(Float64(seconds), preferredTimescale: 1)
             player.seek(to: time) {_ in
                 self.isTimeSliderDraging = false
             }
